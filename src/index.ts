@@ -70,28 +70,26 @@ class Parser<Options extends OptionConfigs> {
   parse(argv: string | string[]) {
     if (!Array.isArray(argv)) argv = stringArgv(argv);
 
-    const optionNames = Object.keys(this.#options);
+    const options = this.#options;
+    const optionNames = Object.keys(options);
+
     return getopts(argv, {
       alias: optionNames.reduce((aliasObj, name) => {
         // Each option must be present in the alias object, even if it has no
         // alias. This ensures that unknown() is not called for any known
         // options.
-        aliasObj[name] = this.#options[name].alias || [];
+        aliasObj[name] = options[name].alias || [];
         return aliasObj;
       }, {} as Record<string, string[]>),
       default: optionNames.reduce((defaultObj, name) => {
-        const defaultValue = this.#options[name].default;
+        const defaultValue = options[name].default;
         if (defaultValue !== undefined) {
           defaultObj[name] = defaultValue;
         }
         return defaultObj;
       }, {} as Record<string, boolean | number | string>),
-      boolean: optionNames.filter(
-        (name) => this.#options[name].type === "boolean"
-      ),
-      string: optionNames.filter(
-        (name) => this.#options[name].type === "string"
-      ),
+      boolean: optionNames.filter((name) => options[name].type === "boolean"),
+      string: optionNames.filter((name) => options[name].type === "string"),
       unknown: (option) => {
         throw new CliError(`Unknown option: ${option}`);
       },
