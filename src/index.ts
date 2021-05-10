@@ -79,6 +79,13 @@ class Parser<Options extends OptionConfigs> {
         aliasObj[name] = this.#options[name].alias || [];
         return aliasObj;
       }, {} as Record<string, string[]>),
+      default: optionNames.reduce((defaultObj, name) => {
+        const defaultValue = this.#options[name].default;
+        if (defaultValue !== undefined) {
+          defaultObj[name] = defaultValue;
+        }
+        return defaultObj;
+      }, {} as Record<string, boolean | number | string>),
       boolean: optionNames.filter(
         (name) => this.#options[name].type === "boolean"
       ),

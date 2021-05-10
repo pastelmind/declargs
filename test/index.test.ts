@@ -31,16 +31,19 @@ describe("parse()", () => {
       options: {
         foo: {
           description: "This is foo",
+          default: 100,
         },
         bar: {
           description: "This is bar",
+          default: "asdf",
         },
       },
     });
 
-    assert.deepEqual(parser.parse("--bar"), {
-      _: [],
-      bar: true,
+    assert.deepEqual(parser.parse("a b c"), {
+      _: ["a", "b", "c"],
+      foo: 100,
+      bar: "asdf",
     });
   });
 
