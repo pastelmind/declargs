@@ -1,6 +1,6 @@
 # declargs
 
-[![Build & Test](https://github.com/pastelmind/declargs/actions/workflows/build.yml/badge.svg)](https://github.com/pastelmind/declargs/actions/workflows/build.yml) [![NPM Package](https://badgen.net/npm/v/declargs)](https://badgen.net/npm/v/declargs)
+[![Build & Test](https://github.com/pastelmind/declargs/actions/workflows/build.yml/badge.svg)](https://github.com/pastelmind/declargs/actions/workflows/build.yml) [![NPM Package](https://badgen.net/npm/v/declargs)](https://npmjs.com/package/declargs)
 
 declargs is a minimal, declarative, TypeScript-first command-line argument parser library. It wraps [getopts] and provides
 
