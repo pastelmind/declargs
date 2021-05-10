@@ -2,7 +2,7 @@
 
 [![Build & Test](https://github.com/pastelmind/declargs/actions/workflows/build.yml/badge.svg)](https://github.com/pastelmind/declargs/actions/workflows/build.yml) [![NPM Package](https://badgen.net/npm/v/declargs)](https://npmjs.com/package/declargs)
 
-declargs is a minimal, declarative, TypeScript-first command-line argument parser library. It wraps [getopts] and provides
+declargs is a minimal, declarative, TypeScript-first command-line argument parser library.
 
 ## Why another argument parser?
 
@@ -80,16 +80,58 @@ const bar = options.bar;
 
 ## API
 
-declargs exports a single factory function: `declargs()`.
+declargs exports a single factory function: `declargs(cfg)`.
 
-### parse()
+### `declargs(cfg)`
 
-### generateHelp()
+Factory function for the parser. Returns the created `parser` object.
+
+#### `cfg.name`
+
+Name of the script. Used in the "Usage" section of the generated help text.
+
+#### `cfg.options`
+
+An object that maps each command line option to its option config object.
+
+Each option config object looks like this:
+
+```ts
+interface OptionConfig {
+  // Required. A string that describes the option.
+  description: string;
+  // Optional. Array of aliases for this option.
+  alias?: string[];
+  // Optional. Default value for this option if it is omitted.
+  // Note that a 'string' type option must be given a string value, and a
+  // 'boolean' type option must be given a boolean value.
+  default?: boolean | number | string;
+  // Optional. A string constant that forces the parser to treat the option
+  // value as a boolean or string.
+  // (There is no constant for 'number')
+  type?: "boolean" | "string";
+}
+```
+
+### `parser.parse(argv)`
+
+Parses a command line string or an array of string tokens and returns an object containing the parsed options.
+
+Alised options will expose every alias as the property of the returned object.
+Any non-option tokens are returned inside the special `_` property.
+
+#### `argv`
+
+A string containing the command line, or an array of strings.
+
+If you use `process.argv`, you must slice it yourself before passing it to declargs.
+
+### `parser.generateHelp()`
 
 Returns a formatted help message as a string.
 
 ```ts
-parser = declargs({
+const parser = declargs({
   name: "helloworld",
   options: {
     foo: {
