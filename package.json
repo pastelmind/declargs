@@ -1,6 +1,6 @@
 {
   "name": "declargs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Declarative, isomorphic, TypeScript-first command-line argument parser",
   "keywords": [
     "cli",
