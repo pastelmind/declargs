@@ -1,0 +1,7 @@
+extension:
+  - "js"
+  - "jsx"
+  - "ts"
+  - "tsx"
+# spec: "spec/**.{js,jsx,ts,tsx}"
+loader: "ts-node/esm"

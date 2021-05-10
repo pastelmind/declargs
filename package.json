@@ -1,0 +1,48 @@
+{
+  "name": "declargs",
+  "version": "0.0.1",
+  "description": "Declarative, isomorphic, TypeScript-first command-line argument parser",
+  "keywords": [
+    "cli",
+    "argv",
+    "minimist",
+    "mri",
+    "getopts"
+  ],
+  "author": "Yehyoung Kang",
+  "license": "MIT",
+  "type": "module",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc -p src/",
+    "clean": "rimraf build/",
+    "lint": "eslint .",
+    "prepack": "npm run build",
+    "style": "prettier --check .",
+    "pretest": "npm run build",
+    "test": "mocha && tsd",
+    "posttest": "npm run lint && npm run style"
+  },
+  "files": [
+    "build"
+  ],
+  "devDependencies": {
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^12.20.12",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "mocha": "^8.4.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.1.1",
+    "tsd": "^0.14.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "getopts": "^2.3.0",
+    "string-argv": "^0.3.1"
+  }
+}
